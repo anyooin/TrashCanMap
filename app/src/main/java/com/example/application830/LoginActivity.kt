@@ -20,6 +20,8 @@ class LoginActivity : AppCompatActivity() {
         val binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        localDB= LocalDB(this, DATABASE_NAME,null, DATABASE_VERSION) // SQLite 모듈 생성
+
         binding.btnLogin.setOnClickListener { view->
             val id = binding.editId.text.toString()
             val passwd = binding.editPw.text.toString()

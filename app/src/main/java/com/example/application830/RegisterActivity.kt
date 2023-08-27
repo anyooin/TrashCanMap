@@ -1,5 +1,6 @@
 package com.example.application830
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -26,6 +27,8 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.makeText(this,"아이디가 이미 존재합니다.",Toast.LENGTH_LONG).show()
                     }else{// 회원가입
                         localDB.registerUser(binding.editId.text.toString(),binding.editPw.text.toString())
+                        val intent = Intent(this,LoginActivity::class.java)
+                        startActivity(intent)
                     }
                 }else{ // 패스워드/패스워드 확인이 일치하지 않음
                     Toast.makeText(this,"패스워드가 틀렸습니다.",Toast.LENGTH_LONG).show()
