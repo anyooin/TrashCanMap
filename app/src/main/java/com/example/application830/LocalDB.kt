@@ -58,13 +58,9 @@ class LocalDB (
         val projection = arrayOf(BaseColumns._ID)
         //,LocalDatas.userData.COLUMN_NAME_ID, LocalDatas.userData.COLUMN_NAME_PASSWORD)
 
-
-        //  WHERE "id" = id AND "password"=password 구문 적용하는 부분
+        //  WHERE "id" = id 구문 적용하는 부분
         val selection = "${LocalDatas.userData.COLUMN_NAME_ID} = ?"
         val selectionArgs = arrayOf(id)
-
-//         정렬조건 지정
-//        val sortOrder = "${FeedEntry.COLUMN_NAME_SUBTITLE} DESC"
 
         val cursor = db.query(
             LocalDatas.userData.TABLE_NAME,   // 테이블
@@ -80,7 +76,6 @@ class LocalDB (
         }else{//반환된 cursor 값이 없음
             return false;
         }
-
     }
 
     fun logIn(id: String, password:String): Boolean {
@@ -89,7 +84,6 @@ class LocalDB (
         // 리턴받고자 하는 컬럼 값의 array
         val projection = arrayOf(BaseColumns._ID)
         //,LocalDatas.userData.COLUMN_NAME_ID, LocalDatas.userData.COLUMN_NAME_PASSWORD)
-
 
         //  WHERE "id" = id AND "password"=password 구문 적용하는 부분
         val selection = "${LocalDatas.userData.COLUMN_NAME_ID} = ? AND ${LocalDatas.userData.COLUMN_NAME_PASSWORD} = ?"
@@ -112,6 +106,37 @@ class LocalDB (
         }else{
             return false;
         }
-
     }
+
+    fun adminMode(id: String, password:String): Boolean {
+        val db = this.readableDatabase
+
+        // 리턴받고자 하는 컬럼 값의 array
+        val projection = arrayOf(BaseColumns._ID)
+        //,LocalDatas.userData.COLUMN_NAME_ID, LocalDatas.userData.COLUMN_NAME_PASSWORD)
+
+        //  WHERE "id" = id AND "password"=password 구문 적용하는 부분
+        val selection = "${LocalDatas.userData.COLUMN_NAME_ID} = ? AND ${LocalDatas.userData.COLUMN_NAME_PASSWORD} = ?"
+        val selectionArgs = arrayOf(id,password)
+
+//         정렬조건 지정
+//        val sortOrder = "${FeedEntry.COLUMN_NAME_SUBTITLE} DESC"
+
+        val cursor = db.query(
+            LocalDatas.userData.TABLE_NAME,   // 테이블
+            projection,             // 리턴 받고자 하는 컬럼
+            selection,              // where 조건
+            selectionArgs,          // where 조건에 해당하는 값의 배열
+            null,                   // 그룹 조건
+            null,                   // having 조건
+            null               // orderby 조건 지정
+        )
+        if(cursor.count>0){//  반환된 cursor의 0번째 값이 null이면
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
 }

@@ -29,6 +29,9 @@ class LoginActivity : AppCompatActivity() {
             if(exist){ // 로그인 성공
                 val intent =Intent(this,MainActivity::class.java)
                 startActivity(intent)
+                login = true
+                ID = id
+                PW = passwd
             }else{ // 실패
                 Toast.makeText(this@LoginActivity, "아이디나 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
             }

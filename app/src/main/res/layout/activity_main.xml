@@ -31,11 +31,31 @@
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:text = "Site"/>
+
     <Button
         android:id="@+id/MaingotoLogin"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:text = "Login"/>
+
+    <Button
+        android:id="@+id/MaingotoLogout"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:text = "Logout"/>
+
+    <TextView
+        android:id="@+id/UserID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="None" />
+
+    <Button
+        android:id="@+id/MaingotoAdmin"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:text = "Admin"/>
 
 
 </LinearLayout>

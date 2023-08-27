@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.application830.databinding.ActivityMainBinding
 
+var login = false
+var ID = ""
+var PW = ""
+
 class MainActivity : AppCompatActivity() {
     val DATABASE_VERSION = 1
     val DATABASE_NAME = "LocalDB.db"
@@ -32,6 +36,38 @@ class MainActivity : AppCompatActivity() {
         binding.MaingotoLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+        }
+        binding.MaingotoLogout.setOnClickListener {
+            login = false
+            binding.MaingotoLogin.isEnabled = true //로그인 버튼 활성화
+            binding.MaingotoLogout.isEnabled = false  //로그아웃 버튼 비활성화
+            binding.MaingotoAdmin.isEnabled = false
+            binding.UserID.text = "None"  //ID 초기화 (None)
+        }
+        binding.MaingotoAdmin.setOnClickListener {
+            val intent = Intent(this, AdminActivity::class.java)
+            startActivity(intent)
+        }
+
+        if(login)  //로그인 중이라면,
+        {
+            binding.MaingotoLogin.isEnabled = false  //로그인 버튼 비활성화
+            binding.MaingotoLogout.isEnabled = true  //로그아웃 버튼 활성화
+            binding.MaingotoAdmin.isEnabled = false
+            binding.UserID.text = ID;  //ID 화면에 뜨도록
+
+        }
+        else  //로그아웃 중이라면,
+        {
+            binding.MaingotoLogin.isEnabled = true //로그인 버튼 활성화
+            binding.MaingotoLogout.isEnabled = false  //로그아웃 버튼 비활성화
+            binding.MaingotoAdmin.isEnabled = false
+            binding.UserID.text = "None"  //ID 초기화 (None)
+        }
+
+        if(ID == "uin")  //관리자 ID가 uin 이라고 가정
+        {
+            binding.MaingotoAdmin.isEnabled = true  //관리자 버튼 활성화
         }
     }
 
