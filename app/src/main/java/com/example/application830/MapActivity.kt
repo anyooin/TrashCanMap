@@ -11,18 +11,18 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.application830.databinding.ActivityMapBinding
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -38,18 +38,21 @@ var mutableList = mutableListOf<Array<String>>()
 
 
 @RequiresApi(33)
-class MapActivity : AppCompatActivity(), OnMapReadyCallback{
+class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
+    View.OnClickListener{
 
     private lateinit var map: GoogleMap
 
     lateinit var locationPermission : ActivityResultLauncher<Array<String>>
     lateinit var fusedLocationClient: FusedLocationProviderClient //위치 서비스가 gps 사용해서 위치를 확인
     lateinit var locationCallback: LocationCallback //위치 값 요청에 대한 갱신 정보를 받는 변수
+    lateinit var binding : ActivityMapBinding
 
-    @RequiresApi(33)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_map)
+
+        binding = ActivityMapBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         locationPermission = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()){ results ->
@@ -61,6 +64,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback{
             {
                 Toast.makeText(this,"승인 권한이 필요합니다", Toast.LENGTH_LONG).show()
             }
+        }
+
+        val registerationBtn = findViewById<Button>(R.id.LocationRegistrationBtn)
+        registerationBtn.setOnClickListener {
+
         }
 
         //권한 요청
@@ -85,6 +93,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback{
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         updateLocation()
+
+        map.setOnMarkerClickListener(this)
+
     }
 
     @SuppressLint("MissingPermission")
@@ -134,16 +145,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback{
 
     fun moveMap(location:Location){
 
-        Log.d("위치정보", "-----moveMap 표시시작!")
         val latLng = LatLng(location.latitude, location.longitude)
         val position = CameraPosition.Builder()
             .target(latLng)
-            .zoom(10f)
+            .zoom(16f)
             .build()
 
         map.moveCamera((CameraUpdateFactory.newCameraPosition(position)))
-
-        Log.d("위치정보", "-----moveMap 표시끝!")
     }
 
     fun movemarker(location: Location)
@@ -155,6 +163,28 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback{
         markerOptions.title("현위치")
 
         map.addMarker(markerOptions)
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        Toast.makeText(this, marker.title + "\n" + marker.position, Toast.LENGTH_SHORT).show()
+        //Log.d("marker","click the mark")
+
+        val dig = RegistrationDialog(this)
+
+        dig.setOnDeleteBtnClickedListener {
+            content -> Toast.makeText(this,"${content}", Toast.LENGTH_SHORT).show()
+        }
+
+        //marker tag에 저장 가능
+
+        dig.show(marker.title)
+        return true
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+
+        }
     }
 
 
