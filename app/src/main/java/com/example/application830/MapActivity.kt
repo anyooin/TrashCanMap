@@ -4,9 +4,9 @@ package com.example.application830
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.location.Address
 import android.location.Geocoder
 import android.location.Location
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
@@ -18,26 +18,26 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.w3c.dom.Document
-import org.w3c.dom.Element
 import org.w3c.dom.Node
 import org.w3c.dom.NodeList
-import org.xml.sax.SAXException
-import java.io.IOException
-import javax.xml.parsers.DocumentBuilder
+import java.util.*
 import javax.xml.parsers.DocumentBuilderFactory
-import javax.xml.parsers.ParserConfigurationException
+
 
 // 설치위치 지번주소 - 설치위치 도로명주소 - 상세위치 - 기준일자 - 개수 - 종류
 var mutableList = mutableListOf<Array<String>>()
 
+
+@RequiresApi(33)
 class MapActivity : AppCompatActivity(), OnMapReadyCallback{
 
     private lateinit var map: GoogleMap
@@ -45,14 +45,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback{
     lateinit var locationPermission : ActivityResultLauncher<Array<String>>
     lateinit var fusedLocationClient: FusedLocationProviderClient //위치 서비스가 gps 사용해서 위치를 확인
     lateinit var locationCallback: LocationCallback //위치 값 요청에 대한 갱신 정보를 받는 변수
-    //val geocoder = Geocoder(this)
 
-
-
+    @RequiresApi(33)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
-
 
         locationPermission = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()){ results ->
@@ -74,21 +71,17 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback{
             )
         )
 
+
         val url = "https://api.odcloud.kr/api/15093750/v1/uddi:b567f95c-7810-4bab-8f14-d0109ccc492b?page=1&perPage=10&returnType=XML&serviceKey=4hFAq3GRnmhcQmJbDNBj5lCELvELwDgkwXTtcFf%2BGiFy9Fl2aWBgwgfEIw4KcyHn6dJtvNGMow0JCeggxu0t3Q%3D%3D"
         val thread = Thread(NetworkThread(url))
         thread.start()
         thread.join()
-
-        for (i in 0..9)
-        {
-            for(j in 0..5) {
-                Log.d("mutableList", "i=${i},j=${j} => ${mutableList[i][j]}  ")
-            }
-        }
     }
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+        map.uiSettings.isZoomControlsEnabled = true
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         updateLocation()
@@ -107,7 +100,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback{
             override fun onLocationResult(locationResult: LocationResult) {
                 locationResult.let{
                     for(location in it.locations) {
-                        Log.d("위치정보", "위도 : ${location.latitude}, 경도 : ${location.longitude}")
+                        //Log.d("위치정보", "위도 : ${location.latitude}, 경도 : ${location.longitude}")
                         if(flag == 1)
                         {
                             flag = 0
@@ -119,6 +112,23 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback{
             }
         }
 
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
     }
 
@@ -128,18 +138,17 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback{
         val latLng = LatLng(location.latitude, location.longitude)
         val position = CameraPosition.Builder()
             .target(latLng)
-            .zoom(16f)
+            .zoom(10f)
             .build()
 
         map.moveCamera((CameraUpdateFactory.newCameraPosition(position)))
-
 
         Log.d("위치정보", "-----moveMap 표시끝!")
     }
 
     fun movemarker(location: Location)
     {
-        Log.d("위치정보", "마커정보!")
+        //Log.d("위치정보", "마커정보!")
         val latLng = LatLng(location.latitude, location.longitude)
         val markerOptions = MarkerOptions()
         markerOptions.position(latLng)
@@ -147,39 +156,10 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback{
 
         map.addMarker(markerOptions)
     }
-/*
-    fun LatLngToAddr () // 경도,위도 -> 주소
-    {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-        != PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(this,"위치 권한을 설정해주세요", Toast.LENGTH_SHORT).show()
-        }
-        else {
-            fusedLocationClient.lastLocation.addOnSuccessListener {
-                val address = geocoder.getFromLocation(it.latitude, it.longitude,1)
-                Toast.makeText(this, "주소 : ${address?.get(0)?.subLocality}", Toast.LENGTH_LONG).show()
-            }
-        }
-    }
 
-    fun AddrToLatLng() // 주소 -> 경도,위도
-    {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(this,"위치 권한을 설정해주세요", Toast.LENGTH_SHORT).show()
-        }
-        else {
-            fusedLocationClient.lastLocation.addOnSuccessListener {
-                //val latlng = geocoder.getFromLocationName(addressInput.text.toString(), 1)
-                //Toast.makeText(this, "주소 : ${latlng?.get(0)?.latitude}, ${latlng?.get(0)?.longitude}", Toast.LENGTH_LONG).show()
-            }
-        }
-    } */
 }
+
 
 class NetworkThread( var url : String ) : Runnable {
     @RequiresApi(Build.VERSION_CODES.N)
@@ -189,13 +169,13 @@ class NetworkThread( var url : String ) : Runnable {
             val xml : Document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(url)
             xml.documentElement.normalize()
 
-            val list:NodeList = xml.getElementsByTagName("col")
-            Log.d("위치정보", "=============length = ${list.length}================")
+            val list: NodeList = xml.getElementsByTagName("col")
+            //Log.d("위치정보", "=============length = ${list.length}================")
 
             var trashPositionArray : Array<String> = Array(6,{"-"})
             for(i in 0..list.length-1) {
                 val n : Node = list.item(i)
-                Log.d("위치정보", "No.${i+1}, ${n.textContent}, ${n.attributes.item(0).textContent}")
+                //Log.d("위치정보", "No.${i+1}, ${n.textContent}, ${n.attributes.item(0).textContent}")
 
                 // 설치위치 지번주소 - 설치위치 도로명주소 - 상세위치 - 기준일자 - 개수 - 종류
                 if(n.attributes.item(0).textContent.equals("설치위치 지번주소")) {
@@ -229,6 +209,8 @@ class NetworkThread( var url : String ) : Runnable {
         }
     }
 }
+
+
 
 
 
