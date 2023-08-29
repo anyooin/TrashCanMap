@@ -1,5 +1,6 @@
 package com.example.application830
 
+import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -18,14 +19,21 @@ class AdminAddressAdapter(val datas : MutableList<AddressImage>)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding = (holder as MyViewHolder).binding
 
-        binding.itemDataAddress.text = datas[position].Address
+        binding.itemDataAddress.text = datas[position].address
+        binding.itemDataImage.setImageBitmap(
+            BitmapFactory.decodeByteArray(datas[position].image, 0, datas[position].image!!.size))
 
         binding.AdminDelete.setOnClickListener{
-            Log.d("uin", "item delete")
+            addressDB.deleteItem(datas[position].num)
         }
 
         binding.AdminRegisterMap.setOnClickListener{
-            Log.d("uin", "item to map")
+            addressDB.registerMapItem(datas[position].num)
+        }
+
+        //임시
+        binding.AdminCancel.setOnClickListener{
+            addressDB.cancelItem(datas[position].num)
         }
 
         binding.itemAddress.setOnClickListener{

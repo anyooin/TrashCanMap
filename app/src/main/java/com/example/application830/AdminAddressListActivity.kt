@@ -13,7 +13,8 @@ class AdminAddressListActivity : AppCompatActivity() {
         val binding = ActivityAdminAddressListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var datas = addressDB.getList("0")
+        //var datas = addressDB.getList("0")
+        var datas = addressDB.getListAll() //임시
 
         binding.AddressList.layoutManager = LinearLayoutManager(this)
         binding.AddressList.adapter = AdminAddressAdapter(datas)
