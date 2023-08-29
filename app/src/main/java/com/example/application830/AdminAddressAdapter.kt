@@ -9,7 +9,7 @@ import com.example.application830.databinding.ItemAddressBinding
 
 class AdminAddressAdapter(val datas : MutableList<AddressImage>)
     :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-        class MyViewHolder(val binding: ItemAddressBinding) : RecyclerView.ViewHolder(binding.root)
+    class MyViewHolder(val binding: ItemAddressBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun getItemCount(): Int  = datas.size
 
