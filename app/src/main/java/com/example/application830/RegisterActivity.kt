@@ -8,18 +8,10 @@ import com.example.application830.databinding.ActivityLoginBinding
 import com.example.application830.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
-    val DATABASE_VERSION = 1
-    val DATABASE_NAME1 = "LocalDB.db"
-    val DATABASE_NAME2 = "AddressDB.db"
-    private lateinit var localDB: LocalDB
-    private lateinit var addressDB: AddressDB
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        localDB= LocalDB(this, DATABASE_NAME1,null, DATABASE_VERSION) // SQLite 모듈 생성
-        addressDB= AddressDB(this, DATABASE_NAME2,null, DATABASE_VERSION)
 
         binding.btnRegister.setOnClickListener { view->
             if(binding.editId.text.isEmpty()||binding.editPw.text.isEmpty()||binding.editPwCheck.text.isEmpty()){// 값이 전부 입력되지 않은경우

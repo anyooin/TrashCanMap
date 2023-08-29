@@ -13,12 +13,14 @@
         <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/registration_dialog.xml" value="0.1" />
         <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/xml/network_config.xml" value="0.271875" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_admin.xml" value="0.23802083333333332" />
+        <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_admin_address_list.xml" value="0.12083333333333333" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_community.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_login.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_map.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_mapaddress.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_register.xml" value="0.23802083333333332" />
+        <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/item_address.xml" value="0.10625" />
       </map>
     </option>
   </component>

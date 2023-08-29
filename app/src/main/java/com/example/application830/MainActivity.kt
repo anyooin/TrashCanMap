@@ -8,13 +8,13 @@ import com.example.application830.databinding.ActivityMainBinding
 var login = false
 var ID = ""
 var PW = ""
+val DATABASE_VERSION = 1
+val DATABASE_NAME1 = "LocalDB.db"
+val DATABASE_NAME2 = "AddressDB.db"
+lateinit var localDB: LocalDB
+lateinit var addressDB: AddressDB
 
 class MainActivity : AppCompatActivity() {
-    val DATABASE_VERSION = 1
-    val DATABASE_NAME1 = "LocalDB.db"
-    val DATABASE_NAME2 = "AddressDB.db"
-    private lateinit var localDB: LocalDB
-    private lateinit var addressDB: AddressDB
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             login = false
             binding.MaingotoLogin.isEnabled = true //로그인 버튼 활성화
             binding.MaingotoLogout.isEnabled = false  //로그아웃 버튼 비활성화
-            binding.MaingotoAdmin.isEnabled = false
+            //binding.MaingotoAdmin.isEnabled = false
             binding.UserID.text = "None"  //ID 초기화 (None)
         }
         binding.MaingotoAdmin.setOnClickListener {
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         {
             binding.MaingotoLogin.isEnabled = false  //로그인 버튼 비활성화
             binding.MaingotoLogout.isEnabled = true  //로그아웃 버튼 활성화
-            binding.MaingotoAdmin.isEnabled = false
+            //binding.MaingotoAdmin.isEnabled = false
             binding.UserID.text = ID;  //ID 화면에 뜨도록
 
         }
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         {
             binding.MaingotoLogin.isEnabled = true //로그인 버튼 활성화
             binding.MaingotoLogout.isEnabled = false  //로그아웃 버튼 비활성화
-            binding.MaingotoAdmin.isEnabled = false
+            //binding.MaingotoAdmin.isEnabled = false
             binding.UserID.text = "None"  //ID 초기화 (None)
         }
 

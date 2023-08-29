@@ -10,8 +10,6 @@ import android.graphics.drawable.Drawable
 import android.provider.BaseColumns
 import java.io.ByteArrayOutputStream
 
-data class AddressImage(var Address: String?, var image: ByteArray?)
-
 class LocalDB (
     context: Context?,
     name: String?,

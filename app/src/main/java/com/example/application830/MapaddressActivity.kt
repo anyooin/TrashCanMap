@@ -16,12 +16,6 @@ import com.example.application830.databinding.ActivityQnaBinding
 import java.io.ByteArrayOutputStream
 
 class MapaddressActivity : AppCompatActivity() {
-    val DATABASE_VERSION = 1
-    val DATABASE_NAME1 = "LocalDB.db"
-    val DATABASE_NAME2 = "AddressDB.db"
-    private lateinit var localDB: LocalDB
-    private lateinit var addressDB: AddressDB
-
     private var uri: Uri? = null;
     private var uriString : String = R.drawable.image_empty.toString()
     lateinit var binding : ActivityMapaddressBinding
@@ -30,9 +24,6 @@ class MapaddressActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMapaddressBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        localDB= LocalDB(this, DATABASE_NAME1,null, DATABASE_VERSION) // SQLite 모듈 생성
-        addressDB= AddressDB(this, DATABASE_NAME2,null, DATABASE_VERSION)
 
         binding.editImage.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)

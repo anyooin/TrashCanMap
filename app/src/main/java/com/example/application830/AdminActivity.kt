@@ -12,6 +12,11 @@ class AdminActivity : AppCompatActivity() {
         val binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.AdmingotoAddressList.setOnClickListener {
+            val intent = Intent(this, AdminAddressListActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.AdmingotoMain.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

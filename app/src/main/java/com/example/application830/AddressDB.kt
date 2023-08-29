@@ -8,8 +8,13 @@ import android.database.sqlite.SQLiteStatement
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.os.FileObserver.DELETE
 import android.provider.BaseColumns
+import com.example.application830.AddressDatas.addressData.COLUMN_NAME_ADDR
+import com.example.application830.AddressDatas.addressData.COLUMN_NAME_IMAGE
 import java.io.ByteArrayOutputStream
+
+data class AddressImage(var Address: String?, var image: ByteArray?)
 
 class AddressDB(
     context: Context?,
@@ -64,29 +69,40 @@ class AddressDB(
         // 인서트후 인서트된 primary key column의 값(_id) 반환.
     }
 
+    fun deleteItem(num : Long) {
+        val db = this.writableDatabase
+        var p : SQLiteStatement =
+            db.compileStatement("DELETE FROM ${AddressDatas.addressData.TABLE_NAME} " +
+                    "WHERE ${BaseColumns._ID} = ?;")
+        p.bindLong(1, num)
+        p.execute()
+    }
 
-
-    fun printList(id: String): MutableList<AddressImage> {
+    fun getList(state: String): MutableList<AddressImage> {
         val list = mutableListOf<AddressImage>()
         val db = this.readableDatabase
 
         // 리턴받고자 하는 컬럼 값의 array
-        val projection = arrayOf(BaseColumns._ID)
+        val projection = arrayOf(BaseColumns._ID,
+            AddressDatas.addressData.COLUMN_NAME_ADDR,
+            AddressDatas.addressData.COLUMN_NAME_IMAGE)
 
         //  WHERE "id" = id 구문 적용하는 부분
         val selection = "${AddressDatas.addressData.COLUMN_NAME_STATE} = ?"
-        val selectionArgs = arrayOf(id)
+        val selectionArgs = arrayOf(state)
 
         val cursor = db.query(
             AddressDatas.addressData.TABLE_NAME, projection,
             selection, selectionArgs, null, null, null)
 
         while(cursor.moveToNext()) {
-            val address = cursor.getString(cursor.getColumnIndexOrThrow(AddressDatas.addressData.COLUMN_NAME_ADDR))
-            val image: ByteArray? = cursor.getBlob(cursor.getColumnIndexOrThrow(AddressDatas.addressData.COLUMN_NAME_IMAGE)) ?: null
+            //val address = cursor.getString(cursor.getColumnIndexOrThrow(AddressDatas.addressData.COLUMN_NAME_ADDR))
+            //val image: ByteArray? = cursor.getBlob(cursor.getColumnIndexOrThrow(AddressDatas.addressData.COLUMN_NAME_IMAGE)) ?: null
+            val address = cursor.getString(1)
+            val image: ByteArray? = cursor.getBlob(2) ?: null
             list.add(AddressImage(address, image))
         }
-        //cursor.close()
+        cursor.close()
         //db.close()
 
         return list
