@@ -3,6 +3,7 @@ package com.example.application830
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.ProgressDialog.show
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
@@ -15,10 +16,12 @@ import android.os.Message
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.application830.databinding.ActivityMapBinding
@@ -49,7 +52,7 @@ var items:MutableList<String> = mutableListOf()
 
 @RequiresApi(33)
 class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
-    View.OnClickListener{
+    View.OnClickListener, GoogleMap.OnMyLocationButtonClickListener{
 
     private lateinit var map: GoogleMap
 
@@ -59,6 +62,16 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
     lateinit var binding : ActivityMapBinding
     var currentMarker : Marker? = null
     var registerBtnClick = false
+
+    private val permission = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+    private val checkPermission = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){
+        result -> result.forEach{
+            if(!it.value){
+                Toast.makeText(this@MapActivity, "갤러리를 열기 위해 권한 동의가 필요합니다.", Toast.LENGTH_LONG).show()
+                finish()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +91,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
             }
         }
 
-
+        //등록요청 버튼
         val registerationBtn = findViewById<Button>(R.id.LocationRegistrationBtn)
         registerationBtn.setOnClickListener {
             Toast.makeText(this,"지도를 눌러 위치를 선택해주세요!", Toast.LENGTH_LONG).show()
@@ -159,29 +172,54 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
     }
 
-
-
+    //googleMap 준비하기
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         map.uiSettings.isZoomControlsEnabled = true
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
+        map.isMyLocationEnabled = true
+        map.setOnMyLocationButtonClickListener(this)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         updateLocation()
 
-        map.setOnMarkerClickListener(this)
 
+        //google map click event 처리
+        map.setOnMarkerClickListener(this)
         map.setOnMapClickListener(object : GoogleMap.OnMapClickListener{
             override fun onMapClick(latLng: LatLng)
             {
                 Log.d("locationCheck", "location = ${latLng.latitude}, ${latLng.longitude}")
                 if(registerBtnClick) {
                     val dig = PositionRegisterDialog(this@MapActivity)
+
+                    dig.setOnYesBtnClicked {
+                            content ->
+                                    Toast.makeText(this@MapActivity, "등록이 요청되었습니다.", Toast.LENGTH_LONG).show()
+
+                    }
+
                     dig.show()
                     registerBtnClick = false
                 }
             }
         })
-
 
         //마커표시하기
         for(i in 0..items.size-1)
@@ -190,7 +228,12 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         }
     }
 
+    override fun onMyLocationButtonClick(): Boolean {
+        return false
+    }
 
+
+    // 위치 update
     @SuppressLint("MissingPermission")
     fun updateLocation(){
         val locationRequest = LocationRequest.create()
@@ -235,6 +278,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
     }
 
+    // 맵 이동
     fun moveMap(location:Location){
 
         val latLng = LatLng(location.latitude, location.longitude)
@@ -245,6 +289,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
         map.moveCamera((CameraUpdateFactory.newCameraPosition(position)))
     }
+
     //현재 마커 위치 변경
     fun movemarker(location: Location)
     {
@@ -257,6 +302,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
         currentMarker = map.addMarker(markerOptions)
     }
+
     //str => 지번주소 상세주소
     fun makemarker(str:String)
     {
@@ -273,6 +319,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
         map.addMarker(markerOptions)
     }
+
     //marker click event
     override fun onMarkerClick(marker: Marker): Boolean {
         //Toast.makeText(this, marker.title + "\n" + marker.position, Toast.LENGTH_SHORT).show()
@@ -291,8 +338,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
         }
     }
-
-
 }
 
 

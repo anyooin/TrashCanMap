@@ -18,6 +18,7 @@
         android:textSize="20dp"/>
 
     <ImageView
+        android:id = "@+id/imgTrashcan"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src = "@drawable/trash"/>
