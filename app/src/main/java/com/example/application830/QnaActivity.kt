@@ -16,7 +16,7 @@ class QnaActivity : AppCompatActivity() {
         var datas = addressDB.getListAll() //임시
 
         binding.qnaList.layoutManager = LinearLayoutManager(this)
-        binding.qnaList.adapter = QnaAdapter(datas)
+        //binding.qnaList.adapter = QnaAdapter(datas)
         binding.qnaList.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
     }
 }

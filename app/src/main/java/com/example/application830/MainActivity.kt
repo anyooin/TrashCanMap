@@ -3,6 +3,7 @@ package com.example.application830
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import com.example.application830.databinding.ActivityMainBinding
 
 var login = false
@@ -15,6 +16,7 @@ lateinit var localDB: LocalDB
 lateinit var addressDB: AddressDB
 
 class MainActivity : AppCompatActivity() {
+    @RequiresApi(33)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,6 +40,10 @@ class MainActivity : AppCompatActivity() {
         }
         binding.MaingotoLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+        binding.MaingotoSite.setOnClickListener {
+            val intent = Intent(this, SiteActivity::class.java)
             startActivity(intent)
         }
         binding.MaingotoLogout.setOnClickListener {
