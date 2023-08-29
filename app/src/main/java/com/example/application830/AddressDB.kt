@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.database.sqlite.SQLiteStatement
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -35,7 +36,6 @@ class AddressDB(
 
     fun createDatabase(db: SQLiteDatabase) {
         // 테이블이 존재하지 않는경우 생성
-
         var sqlAddr: String = "CREATE TABLE if not exists ${AddressDatas.addressData.TABLE_NAME} (" +
                 "${BaseColumns._ID} integer primary key autoincrement," +
                 "${AddressDatas.addressData.COLUMN_NAME_ADDR} varchar(35) not null," +
@@ -49,35 +49,22 @@ class AddressDB(
     //Address 함수들
     fun registerAddressImage(addr: String, image: ByteArray?){
         val db =this.writableDatabase
-        val values = ContentValues().apply {// insert될 데이터값
-            put(AddressDatas.addressData.COLUMN_NAME_ADDR, addr)
-            put(AddressDatas.addressData.COLUMN_NAME_IMAGE, image)
-            put(AddressDatas.addressData.COLUMN_NAME_IMAGE, 0)
-        }
-        val newRowId = db?.insert(AddressDatas.addressData.TABLE_NAME, null, values)
+        var p : SQLiteStatement = db.compileStatement("INSERT INTO ${AddressDatas.addressData.TABLE_NAME} values(null,?, ?,?);")
+        p.bindString(1, addr)
+        p.bindBlob(2, image)
+        p.bindLong(3, 0)
+        p.execute()
+
+//        val values = ContentValues().apply {// insert될 데이터값
+//            put(AddressDatas.addressData.COLUMN_NAME_ADDR, addr)
+//            put(AddressDatas.addressData.COLUMN_NAME_IMAGE, image)
+//            put(AddressDatas.addressData.COLUMN_NAME_STATE, 0)
+//        }
+//        val newRowId = db?.insert(AddressDatas.addressData.TABLE_NAME, null, values)
         // 인서트후 인서트된 primary key column의 값(_id) 반환.
     }
 
-    fun registerAddress(addr: String){
-        val db =this.writableDatabase
-        val values = ContentValues().apply {// insert될 데이터값
-            put(AddressDatas.addressData.COLUMN_NAME_ADDR, addr)
-            put(AddressDatas.addressData.COLUMN_NAME_IMAGE, 0)
-            put(AddressDatas.addressData.COLUMN_NAME_IMAGE, 0)
-        }
-        val newRowId = db?.insert(AddressDatas.addressData.TABLE_NAME, null, values)
-        // 인서트후 인서트된 primary key column의 값(_id) 반환.
-    }
 
-//    fun drawableToByteArray(drawable: Drawable?) : ByteArray? {
-//        val bitmapDrawable = drawable as BitmapDrawable?
-//        val bitmap = bitmapDrawable?.bitmap
-//        val stream = ByteArrayOutputStream()
-//        bitmap?.compress(Bitmap.CompressFormat.PNG, 100, stream)
-//        val byteArray = stream.toByteArray()
-//
-//        return byteArray
-//    }
 
     fun printList(id: String): MutableList<AddressImage> {
         val list = mutableListOf<AddressImage>()
