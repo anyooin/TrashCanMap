@@ -57,5 +57,11 @@
         android:layout_height = "wrap_content"
         android:text = "Admin"/>
 
+    <Button
+        android:id="@+id/MaingotoRegisterAddress"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:text = "Add Address"/>
+
 
 </LinearLayout>

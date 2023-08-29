@@ -13,14 +13,17 @@ import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
     val DATABASE_VERSION = 1
-    val DATABASE_NAME = "LocalDB.db"
+    val DATABASE_NAME1 = "LocalDB.db"
+    val DATABASE_NAME2 = "AddressDB.db"
     private lateinit var localDB: LocalDB
+    private lateinit var addressDB: AddressDB
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        localDB= LocalDB(this, DATABASE_NAME,null, DATABASE_VERSION) // SQLite 모듈 생성
+        localDB= LocalDB(this, DATABASE_NAME1,null, DATABASE_VERSION) // SQLite 모듈 생성
+        addressDB= AddressDB(this, DATABASE_NAME2,null, DATABASE_VERSION)
 
         binding.btnLogin.setOnClickListener { view->
             val id = binding.editId.text.toString()
