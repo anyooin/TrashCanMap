@@ -15,7 +15,7 @@ class RegistrationDialog(private val context : AppCompatActivity) {
     private lateinit var listener : RequestDeleteBtnClickedListener
 
 
-    fun show(str : String?){
+    fun show(str : String?, str1:String?){
         binding = RegistrationDialogBinding.inflate(context.layoutInflater)
 
         dig.setContentView(binding.root)
@@ -23,6 +23,7 @@ class RegistrationDialog(private val context : AppCompatActivity) {
         //binding.(id).text = content // parentacticity 에서 전달받은 text
         context.dialogResize(this,1.0f,0.4f)
         binding.trashcanAddress.setText(str)
+        binding.trashcanAddress1.setText(str1)
         binding.requestDeleteBtn.setOnClickListener{
             //삭제하는 거 작성 todo
             listener.ondeleteClicked("삭제를 눌렀습니다")

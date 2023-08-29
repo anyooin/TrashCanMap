@@ -58,6 +58,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
     lateinit var locationCallback: LocationCallback //위치 값 요청에 대한 갱신 정보를 받는 변수
     lateinit var binding : ActivityMapBinding
     var currentMarker : Marker? = null
+    var registerBtnClick = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,9 +78,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
             }
         }
 
+
         val registerationBtn = findViewById<Button>(R.id.LocationRegistrationBtn)
         registerationBtn.setOnClickListener {
-
+            Toast.makeText(this,"지도를 눌러 위치를 선택해주세요!", Toast.LENGTH_LONG).show()
+            registerBtnClick = true
         }
 
         //권한 요청
@@ -94,6 +97,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         readExcelFileFromAsserts()
     }
 
+
+    //read excel file
     private fun readExcelFileFromAsserts() {
         try{
             val myInput : InputStream
@@ -102,14 +107,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
             //엑셀 시트 열기
             myInput = assetManager.open("trashcan.xlsx")
 
-
             val myWorkBook = WorkbookFactory.create(myInput)
             val sheet = myWorkBook.getSheetAt(0)
 
-
             val rowIter = sheet.rowIterator()
             var rowno = 0
-
             while(rowIter.hasNext())
             {
                 val myRow = rowIter.next() as XSSFRow
@@ -134,11 +136,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
                         {
                             str = str + myCell.toString() + "_"
                         }
-                        else if(colno == 3)//도로명주소
-                        {
-                            str = str + myCell.toString() + "_"
-                        }
-                        else if(colno == 4)//상세주소
+                        else if(colno == 3)//상세주소
                         {
                             str = str + myCell.toString() + "_"
                         }
@@ -148,7 +146,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
                 }
                 rowno++
             }
-            Log.d("checking", "items : " + items)
+            //Log.d("checking", "items : " + items)
+            for(i in 0..items.size-1) {
+                Log.d("checking", "item = ${items[i]}")
+            }
+
         }
         catch(e:Exception)
         {
@@ -168,6 +170,18 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
         map.setOnMarkerClickListener(this)
 
+        map.setOnMapClickListener(object : GoogleMap.OnMapClickListener{
+            override fun onMapClick(latLng: LatLng)
+            {
+                Log.d("locationCheck", "location = ${latLng.latitude}, ${latLng.longitude}")
+                if(registerBtnClick) {
+                    val dig = PositionRegisterDialog(this@MapActivity)
+                    dig.show()
+                    registerBtnClick = false
+                }
+            }
+        })
+
 
         //마커표시하기
         for(i in 0..items.size-1)
@@ -175,6 +189,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
             makemarker(items[i])
         }
     }
+
 
     @SuppressLint("MissingPermission")
     fun updateLocation(){
@@ -242,28 +257,32 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
         currentMarker = map.addMarker(markerOptions)
     }
-    //str => 지번주소, latitude,longitude, 도로명주소, 상세주소, 개수, type, date
+    //str => 지번주소 상세주소
     fun makemarker(str:String)
     {
         var str_arr = str.split("_")
+        Log.d("stt","${str_arr}")
         val latLng = LatLng(str_arr[1].toDouble(), str_arr[2].toDouble())
 
         val markerOptions = MarkerOptions()
         markerOptions.position(latLng)
         markerOptions.title(str_arr[0])
+        markerOptions.snippet(str_arr[3])
+
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
 
         map.addMarker(markerOptions)
     }
-
+    //marker click event
     override fun onMarkerClick(marker: Marker): Boolean {
-        Toast.makeText(this, marker.title + "\n" + marker.position, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, marker.title + "\n" + marker.position, Toast.LENGTH_SHORT).show()
 
         val dig = RegistrationDialog(this)
 
         dig.setOnDeleteBtnClickedListener {
             content -> Toast.makeText(this,"${content}", Toast.LENGTH_SHORT).show()
         }
-        dig.show(marker.title)
+        dig.show(marker.title, marker.snippet)
         return true
     }
 
@@ -275,78 +294,5 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
 
 }
-
-/*
-@RequiresApi(33)
-class NetworkThread(var url : String, private val context : AppCompatActivity ) : Runnable{
-    @RequiresApi(Build.VERSION_CODES.N)
-
-    //var geocoder = Geocoder(context, Locale.getDefault())
-    override fun run()
-    {
-        try {
-            val xml : Document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(url)
-            xml.documentElement.normalize()
-
-            val list: NodeList = xml.getElementsByTagName("col")
-            //Log.d("위치정보", "=============length = ${list.length}================")
-
-            var trashPositionArray : Array<String> = Array(6,{"-"})
-            for(i in 0..list.length-1) {
-                val n : Node = list.item(i)
-                //Log.d("위치정보", "No.${i+1}, ${n.textContent}, ${n.attributes.item(0).textContent}")
-
-                // 설치위치 지번주소 - 설치위치 도로명주소 - 상세위치 - 기준일자 - 개수 - 종류
-                if(n.attributes.item(0).textContent.equals("설치위치 지번주소")) {
-                    trashPositionArray[0] = n.textContent
-                }
-                else if(n.attributes.item(0).textContent.equals("설치위치 도로명주소")) {
-                    trashPositionArray[1] = n.textContent
-                }
-                else if(n.attributes.item(0).textContent.equals("상세위치")) {
-                    trashPositionArray[2] = n.textContent
-                }
-                else if(n.attributes.item(0).textContent.equals("기준일자")) {
-                    trashPositionArray[3] = n.textContent
-                }
-                else if(n.attributes.item(0).textContent.equals("개수")) {
-                    trashPositionArray[4] = n.textContent
-                }
-                else if(n.attributes.item(0).textContent.equals("종류")) {
-                    trashPositionArray[5] = n.textContent
-                }
-
-                if((i+1)%6 == 0) {
-                    val temp : Array<String> = Array(6,{"-"})
-                    System.arraycopy(trashPositionArray,0,temp,0,6)
-                    mutableList.add(temp)
-                }
-            }
-            //geocoder.getFromLocationName(mutableList[0][0], 2, this)
-        } catch(e: Exception)
-        {
-            Log.d("exception", "openAPI"+e.toString())
-        }
-    }
-
-    /*override fun onGeocode(addresses: MutableList<Address>) {
-        if(addresses.isNotEmpty()){
-            val address = addresses[0]
-            val latLng = LatLng(address.latitude, address.longitude)
-            Log.d("LatLng", "Latitude ${latLng.latitude}, Longitude ${latLng.longitude}")
-
-        }else
-        {
-            Log.d("LatLng", "address not found")
-        }
-    }
-
-    override fun onError(errorMessage: String?) {
-        Log.d("LatLng", "Geocoding error : $errorMessage")
-    } */
-}
-
-*/
-
 
 

@@ -27,14 +27,24 @@
             android:layout_marginTop = "40dp"
             android:textSize="20dp"/>
 
+        <!--지번-->
         <TextView
             android:id = "@+id/trashcan_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-"
             android:layout_gravity = "center"
-            android:layout_marginTop = "20dp"
-            android:textSize="20dp"/>
+            android:layout_marginTop = "15dp"
+            android:textSize="15dp"/>
+        <!--상세위치-->
+        <TextView
+            android:id = "@+id/trashcan_address1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:layout_gravity = "center"
+            android:layout_marginTop = "15dp"
+            android:textSize="15dp"/>
 
 
         <LinearLayout
