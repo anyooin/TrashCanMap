@@ -24,7 +24,7 @@ class QnaCheckAdapter (val datas : MutableList<IDQuesAnsw>)
     )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val binding = (holder as QnaAdapter.MyViewHolder).binding
+        val binding = (holder as QnaCheckAdapter.MyViewHolder).binding
 
         binding.itemDataQues.text = datas[position].quesAnsw
         binding.itemDataUser.text = datas[position].id
