@@ -12,6 +12,41 @@
         android:layout_height="wrap_content"
         android:text="대한민국 환경부" />
 
+    <Button
+        android:id = "@+id/gotoBukgu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대구광역시 북구" />
+
+    <Button
+        android:id = "@+id/gotoSeogu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대구광역시 서구" />
+
+    <Button
+        android:id = "@+id/gotoJunggu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대구광역시 중구" />
+
+    <Button
+        android:id = "@+id/gotoDalseong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대구광역시 달성군" />
+
+    <Button
+        android:id = "@+id/gotoDalseo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대구광역시 달서구" />
+
+    <Button
+        android:id = "@+id/gotoNamgu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대구광역시 남구" />
 
 
 </LinearLayout>

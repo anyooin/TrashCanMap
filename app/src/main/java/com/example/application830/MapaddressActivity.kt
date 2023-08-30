@@ -25,6 +25,9 @@ class MapaddressActivity : AppCompatActivity() {
         binding = ActivityMapaddressBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val addrData = intent.getStringExtra("LatLng")
+        binding.editAddress.setText(addrData)
+
         binding.editImage.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"

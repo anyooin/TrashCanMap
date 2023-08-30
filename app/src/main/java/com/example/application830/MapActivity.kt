@@ -63,6 +63,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
     lateinit var fusedLocationClient: FusedLocationProviderClient //위치 서비스가 gps 사용해서 위치를 확인
     lateinit var locationCallback: LocationCallback //위치 값 요청에 대한 갱신 정보를 받는 변수
     lateinit var binding: ActivityMapBinding
+
+    lateinit var addrList0 : MutableList<AddressImage>
+    lateinit var addrList1 : MutableList<AddressImage>
     //lateinit var imageTrashCan : ImageView
 
     var currentMarker: Marker? = null
@@ -87,7 +90,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.trashcanImg.visibility = View.GONE
 
         locationPermission = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
@@ -213,7 +215,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
                     val latLngString : String? = latLng.latitude.toString() + " " + latLng.longitude.toString()
                     Log.d("intentData", "${latLngString}")
-                    intent.putExtra("latitude",latLngString)
+                    intent.putExtra("LatLng",latLngString)
 
                     startActivity(intent)
 
@@ -240,6 +242,28 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         //마커표시하기
         for (i in 0..items.size - 1) {
             makemarker(items[i])
+        }
+
+        //사용자지정
+        addrList0 = addressDB.getList("0")
+        addrList1 = addressDB.getList("1")
+        for(i in 0 .. addrList0.size-1)
+        {
+            var strArr = addrList0.get(i).address?.split(" ")
+
+            val lati : Double = strArr?.get(0)?.toDouble() ?: 0.0
+            val logi : Double = strArr?.get(1)?.toDouble() ?: 0.0
+
+            makeRegisterMarker0(LatLng(lati, logi))
+        }
+        for(i in 0 .. addrList1.size-1)
+        {
+            var strArr = addrList1.get(i).address?.split(" ")
+
+            val lati : Double = strArr?.get(0)?.toDouble() ?: 0.0
+            val logi : Double = strArr?.get(1)?.toDouble() ?: 0.0
+
+            makeRegisterMarker1(LatLng(lati, logi))
         }
     }
 
@@ -337,15 +361,28 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
     }
 
     //str => 등록 요청 주소
-    fun makeRegisterMarker(latLng: LatLng) {
+    fun makeRegisterMarker0(latLng: LatLng) {
         val markerOptions = MarkerOptions()
         markerOptions.position(latLng)
+
         markerOptions.title("요청중")
         markerOptions.snippet("-")
-
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
 
         map.addMarker(markerOptions)
+
+    }
+    //str => 등록 요청 주소
+    fun makeRegisterMarker1(latLng: LatLng) {
+        val markerOptions = MarkerOptions()
+        markerOptions.position(latLng)
+
+        markerOptions.title("사용자 지정 등록")
+        markerOptions.snippet("-")
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+
+        map.addMarker(markerOptions)
+
     }
 
     //marker click event
