@@ -18,8 +18,10 @@ class QnaCheckActivity : AppCompatActivity() {
         var num = intent.getIntExtra("quesnum", 0)
         var datas = qnaDB.getListAnsw(num.toString())
 
-        //binding.checkText.setText(qnaDB.getListQuesText(num.toString()).quesAnsw)
-        //binding.checkUser.setText(qnaDB.getListQuesText(num.toString()).id)
+        println(num)
+
+        binding.checkText.setText(qnaDB.getListQuesText(num.toString()).quesAnsw)
+        binding.checkUser.setText(qnaDB.getListQuesText(num.toString()).id)
 
         binding.checkText.setOnClickListener {
             val intent = Intent(this,EditQnaActivity::class.java)
@@ -36,7 +38,7 @@ class QnaCheckActivity : AppCompatActivity() {
         }
 
         binding.answList.layoutManager = LinearLayoutManager(this)
-        binding.answList.adapter = QnaAdapter(datas)
+        binding.answList.adapter = QnaCheckAdapter(datas)
         binding.answList.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
     }
 }

@@ -7,33 +7,26 @@
         <entry key="..\:/Users/LGPC/AndroidStudioProjects/Application830/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/LGPC/AndroidStudioProjects/Application830/app/src/main/res/layout/activity_map.xml" value="0.15267175572519084" />
         <entry key="..\:/Users/LGPC/AndroidStudioProjects/Application830/app/src/main/res/layout/activity_qna.xml" value="0.22916666666666666" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/drawable/buttonbackground.xml" value="0.1755" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/drawable/image_empty.xml" value="0.1795" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/activity_admin.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/activity_admin_address_list.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/activity_community.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/activity_edit_qna.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/activity_login.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/activity_main.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/activity_map.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/activity_mapaddress.xml" value="0.20208333333333334" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/activity_position_register_dialog.xml" value="0.17083333333333334" />
         <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/activity_qna.xml" value="0.20208333333333334" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/activity_register.xml" value="0.2" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/activity_site.xml" value="0.2526041666666667" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/item_address.xml" value="0.2" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/item_qna.xml" value="0.2125" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/position_register_dialog.xml" value="0.17083333333333334" />
         <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/layout/registration_dialog.xml" value="0.1" />
-        <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/xml/button_background.xml" value="0.25625" />
         <entry key="..\:/Users/LGPC/Desktop/Application830-master/Application830/app/src/main/res/xml/network_config.xml" value="0.271875" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_admin.xml" value="0.23802083333333332" />
+        <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_admin_address_list.xml" value="0.12083333333333333" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_community.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_edit_qna.xml" value="0.264" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_login.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_map.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_mapaddress.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_qna.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_qna_check.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/activity_register.xml" value="0.23802083333333332" />
+        <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/item_address.xml" value="0.264" />
+        <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/item_qna.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/item_qna_check.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/blues/whdvm/Application830/app/src/main/res/layout/registration_dialog.xml" value="0.2526041666666667" />
       </map>
     </option>
   </component>

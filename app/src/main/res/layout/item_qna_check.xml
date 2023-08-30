@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemQna"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/itemDataQues"
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_height="0dp"
+        android:textStyle="bold"
+        android:textSize = "17sp"
+        android:text = "대구광역시 북구 대학로 80"/>
+
+    <TextView
+        android:id="@+id/itemDataUser"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="User"
+        android:textSize="15dp"
+        android:layout_marginLeft = "5dp"
+        android:layout_marginBottom = "5dp"/>
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:orientation="horizontal">-->
+
+    <!--            <Button-->
+    <!--                android:id="@+id/itemEdit"-->
+    <!--                android:layout_width="0dp"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:text="수정"/>-->
+
+    <!--            <Button-->
+    <!--                android:id="@+id/itemDelete"-->
+    <!--                android:layout_width="0dp"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:text="삭제"/>-->
+
+    <!--        </LinearLayout>-->
+
+</LinearLayout>

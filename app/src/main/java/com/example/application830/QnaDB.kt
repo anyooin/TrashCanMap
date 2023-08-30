@@ -101,7 +101,7 @@ class QnaDB (
         return list
     }
 
-    fun getListQuesText(num : String) : IDQuesAnsw{
+    fun getListQuesText(num : String) : IDQuesAnsw {
         val db =this.readableDatabase
 
         // 리턴받고자 하는 컬럼 값의 array
@@ -117,13 +117,24 @@ class QnaDB (
             QnaDatas.quesData.TABLE_NAME, projection,
             selection, selectionArgs, null, null, null)
 
-        val id = cursor.getString(1)
-        val quesAnsw = cursor.getString(2)
+        var one : IDQuesAnsw = IDQuesAnsw(0, "user", "quest")
 
+        while(cursor.moveToNext()) {
+            //val address = cursor.getString(cursor.getColumnIndexOrThrow(AddressDatas.addressData.COLUMN_NAME_ADDR))
+            //val image: ByteArray? = cursor.getBlob(cursor.getColumnIndexOrThrow(AddressDatas.addressData.COLUMN_NAME_IMAGE)) ?: null
+            val num = cursor.getInt(0)
+            val id = cursor.getString(1)
+            val quesAnsw = cursor.getString(2)
+            one = IDQuesAnsw(num, id, quesAnsw)
+        }
+
+//        val num = cursor.getInt(0)
+//        val id = cursor.getString(1)
+//        val quesAnsw = cursor.getString(2)
 
         cursor.close()
 
-        return IDQuesAnsw(num.toInt(), id, quesAnsw)
+        return one
     }
 
     fun getListAnsw(num: String) : MutableList<IDQuesAnsw>{

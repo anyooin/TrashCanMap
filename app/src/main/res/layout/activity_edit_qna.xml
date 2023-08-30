@@ -27,13 +27,13 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <Button
-            android:id = "@+id/deleteBtn"
-            android:layout_height = "wrap_content"
-            android:layout_width = "120dp"
-            android:layout_gravity = "center"
-            android:text = "삭제하기"
-            android:visibility = "invisible"/>
+<!--        <Button-->
+<!--            android:id = "@+id/deleteBtn"-->
+<!--            android:layout_height = "wrap_content"-->
+<!--            android:layout_width = "120dp"-->
+<!--            android:layout_gravity = "center"-->
+<!--            android:text = "삭제하기"-->
+<!--            android:visibility = "invisible"/>-->
 
     <Button
         android:id = "@+id/btn"

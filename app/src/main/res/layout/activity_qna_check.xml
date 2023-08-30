@@ -46,6 +46,11 @@
         android:layout_marginLeft = "5dp"
         android:layout_marginBottom = "20dp"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background = "@color/purple_200"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/answList"
         android:layout_width="match_parent"
