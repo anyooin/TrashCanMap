@@ -52,19 +52,21 @@
             android:layout_height = "match_parent"
             android:gravity = "center">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id = "@+id/requestDeleteBtn"
                 android:layout_height = "wrap_content"
                 android:layout_width = "wrap_content"
                 android:layout_gravity = "center"
+                android:background = "@drawable/buttonbackground"
                 android:text = "삭제 요청"/>
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id = "@+id/cancleBtn"
                 android:layout_height = "wrap_content"
                 android:layout_width = "40dp"
                 android:layout_marginLeft = "20dp"
                 android:layout_gravity = "center"
-                android:text = "X"/>
+                android:text = "X"
+                android:background = "@drawable/buttonbackground"/>
         </LinearLayout>
 
     </LinearLayout>

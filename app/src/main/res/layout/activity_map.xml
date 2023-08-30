@@ -18,14 +18,13 @@
 
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/LocationRegistrationBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="위치 등록하기"
-        android:layout_gravity="center|bottom"/>
-
-
-
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom = "10dp"
+        android:background = "@drawable/buttonbackground"/>
 
 </FrameLayout>

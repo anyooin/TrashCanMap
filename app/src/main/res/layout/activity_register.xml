@@ -36,10 +36,11 @@
         android:inputType="textPersonName"
         android:layout_marginTop="20dp"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="가입하기"
+        android:background = "@drawable/buttonbackground"
         android:layout_marginTop="20dp"/>
 </LinearLayout>

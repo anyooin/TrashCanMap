@@ -247,12 +247,15 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         //사용자지정
         addrList0 = addressDB.getList("0")
         addrList1 = addressDB.getList("1")
+        Log.d("addrList", "${addrList0.size}, ${addrList1.size}")
         for(i in 0 .. addrList0.size-1)
         {
-            var strArr = addrList0.get(i).address?.split(" ")
-
+            //var strArr = addrList0.get(i).address?.split(" ")
+            var strArr = addrList0[i].address?.split(" ")
             val lati : Double = strArr?.get(0)?.toDouble() ?: 0.0
             val logi : Double = strArr?.get(1)?.toDouble() ?: 0.0
+
+            Log.d("addrList", "addrlist0 =  ${lati}, ${logi}")
 
             makeRegisterMarker0(LatLng(lati, logi))
         }
@@ -263,6 +266,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
             val lati : Double = strArr?.get(0)?.toDouble() ?: 0.0
             val logi : Double = strArr?.get(1)?.toDouble() ?: 0.0
 
+            Log.d("addrList", "addrlist0 =  ${lati}, ${logi}")
             makeRegisterMarker1(LatLng(lati, logi))
         }
     }

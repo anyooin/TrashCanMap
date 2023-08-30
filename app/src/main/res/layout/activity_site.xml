@@ -6,45 +6,58 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id = "@+id/gotoMinistryofEnvironment"
-        android:layout_width="wrap_content"
+        android:background = "@drawable/buttonbackground"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="대한민국 환경부" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id = "@+id/gotoBukgu"
-        android:layout_width="wrap_content"
+        android:background = "@drawable/buttonbackground"
+        android:layout_marginTop = "20dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="대구광역시 북구" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id = "@+id/gotoSeogu"
-        android:layout_width="wrap_content"
+        android:background = "@drawable/buttonbackground"
+        android:layout_marginTop = "20dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="대구광역시 서구" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id = "@+id/gotoJunggu"
-        android:layout_width="wrap_content"
+        android:background = "@drawable/buttonbackground"
+        android:layout_marginTop = "20dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="대구광역시 중구" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id = "@+id/gotoDalseong"
-        android:layout_width="wrap_content"
+        android:background = "@drawable/buttonbackground"
+        android:layout_marginTop = "20dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="대구광역시 달성군" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id = "@+id/gotoDalseo"
-        android:layout_width="wrap_content"
+        android:background = "@drawable/buttonbackground"
+        android:layout_marginTop = "20dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="대구광역시 달서구" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id = "@+id/gotoNamgu"
-        android:layout_width="wrap_content"
+        android:background = "@drawable/buttonbackground"
+        android:layout_marginTop = "20dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="대구광역시 남구" />
 
