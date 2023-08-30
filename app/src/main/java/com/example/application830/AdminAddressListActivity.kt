@@ -13,11 +13,16 @@ class AdminAddressListActivity : AppCompatActivity() {
         val binding = ActivityAdminAddressListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //var datas = addressDB.getList("0")
-        var datas = addressDB.getListAll() //임시
+        //var datas = addressDB.getListAll()
+        var datas1 = addressDB.getList("0")
 
         binding.AddressList.layoutManager = LinearLayoutManager(this)
-        binding.AddressList.adapter = AdminAddressAdapter(datas)
+        binding.AddressList.adapter = AdminAddressAdapter(datas1)
         binding.AddressList.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+
+        var datas3 = addressDB.getList("1")
+        binding.AddressDeleteList.layoutManager = LinearLayoutManager(this)
+        binding.AddressDeleteList.adapter = AdminAddressAdapter(datas3)
+        binding.AddressDeleteList.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
     }
 }

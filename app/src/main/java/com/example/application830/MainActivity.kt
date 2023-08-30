@@ -55,6 +55,9 @@ class MainActivity : AppCompatActivity() {
             login = false
             ID = ""
             PW = ""
+            binding.MaingotoLogout.visibility = View.GONE
+            binding.MaingotoLogin.visibility = View.VISIBLE
+
             binding.MaingotoLogin.isEnabled = true //로그인 버튼 활성화
             binding.MaingotoLogout.isEnabled = false  //로그아웃 버튼 비활성화
             binding.MaingotoAdmin.isEnabled = false

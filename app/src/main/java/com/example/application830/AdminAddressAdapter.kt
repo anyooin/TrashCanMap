@@ -39,5 +39,6 @@ class AdminAddressAdapter(val datas : MutableList<AddressImage>)
         binding.itemAddress.setOnClickListener{
             Log.d("uin", "item click")
         }
+
     }
 }

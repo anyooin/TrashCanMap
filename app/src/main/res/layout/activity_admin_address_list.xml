@@ -4,12 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminAddressListActivity">
+    tools:context=".AdminAddressListActivity"
+    android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/AddressList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginBottom="10dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background = "@color/purple_200"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/AddressDeleteList"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
         android:layout_marginBottom="10dp">
 
     </androidx.recyclerview.widget.RecyclerView>

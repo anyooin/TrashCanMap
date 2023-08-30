@@ -88,8 +88,6 @@ class AddressDB(
                     "WHERE ${BaseColumns._ID} = " + num + ";")
 
         p.execute()
-
-        //UPDATE AddressDB SET state=1 WHERE ID=1
     }
 
     fun cancelItem(num : Int) {
@@ -100,8 +98,16 @@ class AddressDB(
                     "WHERE ${BaseColumns._ID} = " + num + ";")
 
         p.execute()
+    }
 
-        //UPDATE AddressDB SET state=1 WHERE ID=1
+    fun deleteWaitItem(num : Int) {
+        val db = this.writableDatabase
+        var p : SQLiteStatement = db.compileStatement(
+            "UPDATE ${AddressDatas.addressData.TABLE_NAME} " +
+                    "SET ${AddressDatas.addressData.COLUMN_NAME_STATE} = 3 " +
+                    "WHERE ${BaseColumns._ID} = " + num + ";")
+
+        p.execute()
     }
 
     fun getList(state: String): MutableList<AddressImage> {
