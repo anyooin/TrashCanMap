@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.application830.databinding.ItemAddressBinding
 import com.example.application830.databinding.ItemQnaBinding
 
-class QnaAdapter (val datas : MutableList<QnaDatas>)
+class QnaAdapter (val datas : MutableList<IDQuesAnsw>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     class MyViewHolder(val binding: ItemQnaBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -26,19 +26,15 @@ class QnaAdapter (val datas : MutableList<QnaDatas>)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding = (holder as QnaAdapter.MyViewHolder).binding
 
-        //binding.itemDataQues.text = datas[position].question
+        binding.itemDataQues.text = datas[position].quesAnsw
 
         binding.itemCheck.setOnClickListener{
             //인텐트 넘겨주기
         }
 
-//        binding.itemDelete.setOnClickListener{
-//            qnaDB.deleteItem(datas[position].num)
-//        }
-
-
-        binding.itemAddress.setOnClickListener{
-            Log.d("uin", "item click")
+        binding.itemDelete.setOnClickListener{
+            qnaDB.deleteQuesItem(datas[position].num)
         }
+
     }
 }

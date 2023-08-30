@@ -12,8 +12,10 @@ var PW = ""
 val DATABASE_VERSION = 1
 val DATABASE_NAME1 = "LocalDB.db"
 val DATABASE_NAME2 = "AddressDB.db"
+val DATABASE_NAME3 = "QnaDB.db"
 lateinit var localDB: LocalDB
 lateinit var addressDB: AddressDB
+lateinit var qnaDB: QnaDB
 
 class MainActivity : AppCompatActivity() {
     @RequiresApi(33)
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         localDB= LocalDB(this, DATABASE_NAME1,null, DATABASE_VERSION) // SQLite 모듈 생성
         addressDB= AddressDB(this, DATABASE_NAME2,null, DATABASE_VERSION)
+        qnaDB= QnaDB(this, DATABASE_NAME3,null, DATABASE_VERSION)
 
         binding.MaingotoMap.setOnClickListener {
             val intent = Intent(this, MapActivity::class.java)
@@ -48,9 +51,11 @@ class MainActivity : AppCompatActivity() {
         }
         binding.MaingotoLogout.setOnClickListener {
             login = false
+            ID = ""
+            PW = ""
             binding.MaingotoLogin.isEnabled = true //로그인 버튼 활성화
             binding.MaingotoLogout.isEnabled = false  //로그아웃 버튼 비활성화
-            //binding.MaingotoAdmin.isEnabled = false
+            binding.MaingotoAdmin.isEnabled = false
             binding.UserID.text = "None"  //ID 초기화 (None)
         }
         binding.MaingotoAdmin.setOnClickListener {
@@ -66,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         {
             binding.MaingotoLogin.isEnabled = false  //로그인 버튼 비활성화
             binding.MaingotoLogout.isEnabled = true  //로그아웃 버튼 활성화
-            //binding.MaingotoAdmin.isEnabled = false
+            binding.MaingotoAdmin.isEnabled = false
             binding.UserID.text = ID;  //ID 화면에 뜨도록
 
         }
@@ -74,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         {
             binding.MaingotoLogin.isEnabled = true //로그인 버튼 활성화
             binding.MaingotoLogout.isEnabled = false  //로그아웃 버튼 비활성화
-            //binding.MaingotoAdmin.isEnabled = false
+            binding.MaingotoAdmin.isEnabled = false
             binding.UserID.text = "None"  //ID 초기화 (None)
         }
 
