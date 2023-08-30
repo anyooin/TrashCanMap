@@ -13,7 +13,7 @@ class QnaActivity : AppCompatActivity() {
         val binding = ActivityQnaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var datas = qnaDB.getListQues() //임시
+        var datas = qnaDB.getListQues()
 
         binding.addQnaItem.setOnClickListener {
             val intent = Intent(this,EditQnaActivity::class.java)
@@ -21,8 +21,8 @@ class QnaActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.qnaList.layoutManager = LinearLayoutManager(this)
-        binding.qnaList.adapter = QnaAdapter(datas)
-        binding.qnaList.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+        binding.quesList.layoutManager = LinearLayoutManager(this)
+        binding.quesList.adapter = QnaAdapter(datas)
+        binding.quesList.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
     }
 }

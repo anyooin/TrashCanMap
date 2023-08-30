@@ -7,48 +7,57 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/UserBtn"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/UserBtn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="horizontal">-->
 
-        <Button
-            android:id = "@+id/editBtn"
-            android:layout_height = "wrap_content"
-            android:layout_width = "0dp"
-            android:layout_weight = "1"
-            android:text = "수정하기"/>
+<!--        <Button-->
+<!--            android:id = "@+id/editBtn"-->
+<!--            android:layout_height = "wrap_content"-->
+<!--            android:layout_width = "0dp"-->
+<!--            android:layout_weight = "1"-->
+<!--            android:text = "수정하기"/>-->
 
-        <Button
-            android:id = "@+id/deleteBtn"
-            android:layout_height = "wrap_content"
-            android:layout_width = "0dp"
-            android:layout_weight = "1"
-            android:text = "삭제하기"/>
+<!--        <Button-->
+<!--            android:id = "@+id/deleteBtn"-->
+<!--            android:layout_height = "wrap_content"-->
+<!--            android:layout_width = "0dp"-->
+<!--            android:layout_weight = "1"-->
+<!--            android:text = "삭제하기"/>-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
     <TextView
+        android:id = "@+id/checkText"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="200dp"
         android:text="질문내용"
         android:textSize="15dp"/>
 
     <TextView
+        android:id = "@+id/checkUser"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:text="User"
         android:textSize="15dp"
+        android:layout_marginLeft = "5dp"
         android:layout_marginBottom = "20dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/qnaList"
+        android:id="@+id/answList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="380dp"
         android:layout_marginBottom="10dp">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id = "@+id/answerBtn"
+        android:layout_height = "50dp"
+        android:layout_width = "120dp"
+        android:text = "답변하기"/>
 
 </LinearLayout>

@@ -101,6 +101,31 @@ class QnaDB (
         return list
     }
 
+    fun getListQuesText(num : String) : IDQuesAnsw{
+        val db =this.readableDatabase
+
+        // 리턴받고자 하는 컬럼 값의 array
+        val projection = arrayOf(BaseColumns._ID,
+            QnaDatas.quesData.COLUMN_NAME_QUESID,
+            QnaDatas.quesData.COLUMN_NAME_QUESTION)
+
+        //  WHERE "id" = id 구문 적용하는 부분
+        val selection = "${BaseColumns._ID} = ?"
+        val selectionArgs = arrayOf(num)
+
+        val cursor = db.query(
+            QnaDatas.quesData.TABLE_NAME, projection,
+            selection, selectionArgs, null, null, null)
+
+        val id = cursor.getString(1)
+        val quesAnsw = cursor.getString(2)
+
+
+        cursor.close()
+
+        return IDQuesAnsw(num.toInt(), id, quesAnsw)
+    }
+
     fun getListAnsw(num: String) : MutableList<IDQuesAnsw>{
         val list = mutableListOf<IDQuesAnsw>()
         val db =this.readableDatabase
@@ -115,7 +140,7 @@ class QnaDB (
         val selectionArgs = arrayOf(num)
 
         val cursor = db.query(
-            QnaDatas.quesData.TABLE_NAME, projection,
+            QnaDatas.answData.TABLE_NAME, projection,
             selection, selectionArgs, null, null, null)
 
 

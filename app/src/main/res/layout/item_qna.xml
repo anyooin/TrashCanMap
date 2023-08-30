@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/item_address"
+    android:id="@+id/itemQna"
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:orientation="vertical"
@@ -16,26 +16,35 @@
             android:textSize = "17sp"
             android:text = "대구광역시 북구 대학로 80"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="0dp"
-            android:orientation="horizontal">
+    <TextView
+        android:id="@+id/itemDataUser"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="User"
+        android:textSize="15dp"
+        android:layout_marginLeft = "5dp"
+        android:layout_marginBottom = "5dp"/>
 
-            <Button
-                android:id="@+id/itemCheck"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="확인"/>
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:orientation="horizontal">-->
 
-            <Button
-                android:id="@+id/itemDelete"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="삭제"/>
+<!--            <Button-->
+<!--                android:id="@+id/itemEdit"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="수정"/>-->
 
-        </LinearLayout>
+<!--            <Button-->
+<!--                android:id="@+id/itemDelete"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="삭제"/>-->
+
+<!--        </LinearLayout>-->
 
 </LinearLayout>
