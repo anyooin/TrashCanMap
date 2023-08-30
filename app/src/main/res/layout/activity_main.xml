@@ -6,43 +6,102 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MAIN!" />
+        android:text="MAIN!" />-->
 
-    <Button
-        android:id="@+id/MaingotoMap"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:text = "Map"/>
-    <Button
-        android:id="@+id/MaingotoQna"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:text = "QnA"/>
-    <Button
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/MaingotoMap"
+            android:layout_width = "150dp"
+            android:layout_height = "150dp"
+            android:background = "@drawable/buttonbackground"
+            android:layout_marginRight = "20dp"
+            android:text = "Map"
+            android:textSize = "30dp"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/MaingotoQna"
+            android:background = "@drawable/buttonbackground"
+            android:layout_width = "150dp"
+            android:layout_height = "150dp"
+            android:text = "QnA"
+            android:textSize = "30dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/MaingotoSite"
+            android:layout_width = "150dp"
+            android:layout_height = "150dp"
+            android:background = "@drawable/buttonbackground"
+            android:text = "Site"
+            android:textSize = "30dp"
+            android:layout_marginTop = "20dp"
+            android:layout_marginRight = "20dp"
+            android:layout_marginBottom = "20dp"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/MaingotoAdmin"
+            android:layout_width = "150dp"
+            android:layout_height = "150dp"
+            android:background = "@drawable/buttonbackground"
+            android:text = "Admin"
+            android:textSize = "30dp"
+            android:layout_marginTop = "20dp"
+            android:layout_marginBottom = "20dp"/>
+
+
+    </LinearLayout>
+    <!--<Button
         android:id="@+id/MaingotoCommunity"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
-        android:text = "Community"/>
-    <Button
-        android:id="@+id/MaingotoSite"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:text = "Site"/>
+        android:text = "Community"/>-->
 
-    <Button
-        android:id="@+id/MaingotoLogin"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:text = "Login"/>
 
-    <Button
-        android:id="@+id/MaingotoLogout"
+    <!--<Button
+        android:id="@+id/MaingotoRegisterAddress"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
-        android:text = "Logout"/>
+        android:text = "Add Address"/>-->
+
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop = "20dp"
+        android:gravity="center">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/MaingotoLogin"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:background = "@drawable/buttonbackground"
+            android:text = "Login"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/MaingotoLogout"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+
+            android:background = "@drawable/buttonbackground"
+            android:text = "Logout"/>
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/UserID"
@@ -50,18 +109,6 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="None" />
-
-    <Button
-        android:id="@+id/MaingotoAdmin"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:text = "Admin"/>
-
-    <Button
-        android:id="@+id/MaingotoRegisterAddress"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:text = "Add Address"/>
 
 
 </LinearLayout>

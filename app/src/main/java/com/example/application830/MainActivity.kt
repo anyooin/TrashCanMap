@@ -3,6 +3,7 @@ package com.example.application830
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import com.example.application830.databinding.ActivityMainBinding
 
@@ -37,10 +38,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, QnaActivity::class.java)
             startActivity(intent)
         }
-        binding.MaingotoCommunity.setOnClickListener {
+        /*binding.MaingotoCommunity.setOnClickListener {
             val intent = Intent(this, CommunityActivity::class.java)
             startActivity(intent)
-        }
+        }*/
         binding.MaingotoLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SiteActivity::class.java)
             startActivity(intent)
         }
+
         binding.MaingotoLogout.setOnClickListener {
             login = false
             ID = ""
@@ -62,13 +64,17 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AdminActivity::class.java)
             startActivity(intent)
         }
+        /*
         binding.MaingotoRegisterAddress.setOnClickListener {
             val intent = Intent(this, MapaddressActivity::class.java)
             startActivity(intent)
-        }
+        } */
 
         if(login)  //로그인 중이라면,
         {
+            binding.MaingotoLogout.visibility = View.VISIBLE
+            binding.MaingotoLogin.visibility = View.GONE
+
             binding.MaingotoLogin.isEnabled = false  //로그인 버튼 비활성화
             binding.MaingotoLogout.isEnabled = true  //로그아웃 버튼 활성화
             binding.MaingotoAdmin.isEnabled = false
@@ -77,6 +83,9 @@ class MainActivity : AppCompatActivity() {
         }
         else  //로그아웃 중이라면,
         {
+            binding.MaingotoLogout.visibility = View.GONE
+            binding.MaingotoLogin.visibility = View.VISIBLE
+
             binding.MaingotoLogin.isEnabled = true //로그인 버튼 활성화
             binding.MaingotoLogout.isEnabled = false  //로그아웃 버튼 비활성화
             binding.MaingotoAdmin.isEnabled = false
