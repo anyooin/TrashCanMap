@@ -2,19 +2,26 @@ package com.example.application830
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Point
+import android.net.Uri
 import android.os.Build
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.application830.databinding.PositionRegisterDialogBinding
 
-class PositionRegisterDialog(private val context : AppCompatActivity) {
+class PositionRegisterDialog(private val context : AppCompatActivity) : AppCompatActivity(){
 
     private lateinit var listener: PositionRegisterDialog.PositionRegisterListener
     private lateinit var binding : PositionRegisterDialogBinding
-    private val dig = Dialog(context)
+    val dig = Dialog(context)
+
+    private var uri: Uri? = null
 
     interface PositionRegisterListener {
         fun onYesClicked(Content:String)
@@ -31,7 +38,10 @@ class PositionRegisterDialog(private val context : AppCompatActivity) {
 
         //갤러리에 사진 등록해야됨
         binding.imgTrashcan.setOnClickListener {
-            //listener.imgClicked("갤러리")
+            //Log.d("checkImg","setOnClickListener")
+            //val intent = Intent(Intent.ACTION_PICK)
+            //intent.type = "image/*"
+            //activityResult.launch(intent)
         }
         binding.registerYesBtn.setOnClickListener{
             //등록하는거 관리자에게 전달할 수 있도록 하기 Todo
@@ -85,4 +95,18 @@ class PositionRegisterDialog(private val context : AppCompatActivity) {
             window?.setLayout(x, y)
         }
     }
+
+    /*private val activityResult:ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) {
+
+        if(it.resultCode == AppCompatActivity.RESULT_OK && it.data != null) {
+            uri = it.data!!.data!!
+            //uriString = uri.toString()
+
+            //binding.editImage.setImageURI(Uri.parse(uriString))
+            //binding.editImage.tag = uriString
+
+            Glide.with(this).load(uri).into(binding.imgTrashcan)
+        }
+    }*/
 }
